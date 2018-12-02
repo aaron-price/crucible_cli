@@ -25,7 +25,10 @@ def cp(fr, to, r=False):
 def addPath(p):
     sudo("echo 'export PATH=\"$PATH:%s\"' >> /root/bash_config/paths.sh" % (p))
 
+def wgetAs(url, filename):
+    wget("-O %s %s" % (filename, url))
+
 def rpm(url):
-    wget(url + " installer.rpm")
+    wgetAs(url, "installer.rpm")
     sudo("rpm -Uvh installer.rpm")
     rm("installer.rpm")

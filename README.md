@@ -3,9 +3,17 @@ If your name isn't aaron-price, this won't work.
 It's a helper cli for setting up a fresh centos vps for use with my own "Crucible" web framework, which is in a private repo
 
 ## Usage:
-- spinup a droplet
-- `git clone git@github.com:aaron-price/crucible_cli.git && ./crucible_cli/__main__.py`
-- You now have a web app running at your public ip address.
+spinup a droplet
+
+
+```bash 
+yum install -y git && \
+git clone https://github.com/aaron-price/crucible_cli.git && \
+./crucible_cli/__main__.py
+```
+
+
+You now have a web app running at your public ip address.
 
 ## Crucible:
 - My second homemade web framework, focused on performance, security, and dev experience

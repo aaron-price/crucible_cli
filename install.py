@@ -27,9 +27,6 @@ def setupElixir():
     y("java-1.8.0-openjdk-devel wxBase.x86_64")
 
     # Erlang
-    #wget("https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm")
-    #erl_name = "erlang-solutions-1.0-1.noarch.rpm"
-    #erl_url = "https://packages.erlang-solutions.com/" + erl_name
     erl_url = "https://github.com/rabbitmq/erlang-rpm/releases/download/v21.1.4/erlang-21.1.4-1.el7.centos.x86_64.rpm"
     rpm(erl_url)
     update()
@@ -37,10 +34,11 @@ def setupElixir():
 
     # Elixir
     ex_path = "/usr/bin/elixir"
+    sudo("mkdir " + ex_path)
     ex_url = "https://github.com/elixir-lang/elixir/releases/download/v1.7.4/Precompiled.zip"
     ex_zip = ex_path + "/Precompiled.zip"
-    wget(ex_url + " " + ex_zip)
-    sudo("unzip " + ex_zip)
+    wgetAs(ex_url, ex_zip)
+    sudo("unzip " + ex_zip + " -d " + ex_path)
 
     addPath(ex_path + "/bin")
     rm(ex_zip)
@@ -54,7 +52,8 @@ def setupCLJS():
 
     # lein
     local_lein = "/usr/local/bin/lein"
-    wget("https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein " + local_lein)
+    wgetAs("https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein", local_lein)
+    addPath(local_lein)
     sudo("chmod a+x " + local_lein)
     
 def setupNode():
@@ -73,9 +72,6 @@ def setupArango():
     # Arango debug info
     rpm("https://download.arangodb.com/arangodb33/CentOS_7/x86_64/arangodb3-debuginfo-3.3.19-1.x86_64.rpm")
 
-    y("arangodb3-3.3.19")
-    y("arangodb3-client-3.3.19")
-    y("arangodb3-debuginfo-3.3.19")
     sudo("npm i -g webpack foxx-cli")
 
 
