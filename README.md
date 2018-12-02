@@ -7,7 +7,7 @@ No venv or anything.
 Literally spinup a droplet, ssh in, dl the repo, and run python ./path.py. Boom, crucible website running on your public ip address. Provide a domain name, and it runs on https.
 
 Crucible:
-- My second homemade web framework, focused on performance security, and dev experience
+- My second homemade web framework, focused on performance, security, and dev experience
 - Functional, immutable, beautiful.
 - Sub-milisecond response times ( <3 elixir )
 - Clojurescript frontend (with cljs' implementation of react, redux)
@@ -17,6 +17,5 @@ Crucible:
 - Python cli for bootstrapping it on a fresh digitalocean droplet.
 
 ## Usage
-git clone <repo>
-./repo/main.py
-
+git clone git@github.com:aaron-price/crucible_cli.git
+./crucible_cli/__main__.py
