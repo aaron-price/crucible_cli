@@ -1,7 +1,6 @@
 import os
 from sh import *
 
-
 cli_files = "/root/crucible_cli/files"
 
 def setupBash():
@@ -12,7 +11,8 @@ def setupBash():
     sh("source ~/.bash_profile")
 
     update()
-    y("wget git unzip epel-release nginx")
+    y("wget git unzip epel-release nginx vim")
+    sudo("git config --global user.email \"coding.aaronp@gmail.com\"")
     ctl("start nginx")
     ctl("enable nginx")
     rm("/etc/nginx/nginx.conf")
@@ -49,12 +49,14 @@ def setupCLJS():
     curl("-O " + cljs_url)
     sudo("chmod +x " + cljs_installer)
     sudo("./" + cljs_installer)
+    rm(cljs_installer)
 
     # lein
     local_lein = "/usr/local/bin/lein"
     wgetAs("https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein", local_lein)
     addPath(local_lein)
     sudo("chmod a+x " + local_lein)
+    sh("lein")
     
 def setupNode():
     curl("-sL https://rpm.nodesource.com/setup_10.x | sudo bash -")
@@ -72,7 +74,15 @@ def setupArango():
     # Arango debug info
     rpm("https://download.arangodb.com/arangodb33/CentOS_7/x86_64/arangodb3-debuginfo-3.3.19-1.x86_64.rpm")
 
+    update()
     sudo("npm i -g webpack foxx-cli")
+    sudo("export GLIBCXX_FORCE_NEW=1")
+    sudo("bash -c \"echo madvise > /sys/kernel/mm/transparent_hugepage/enabled\"")
+    sudo("bash -c \"echo madvise > /sys/kernel/mm/transparent_hugepage/defrag\"")
+    print("=== SETTING UP ARANGODB ===")
+    sudo("arango-secure-installation")
+    ctl("start arangodb3")
+
 
 
 def installAll():
@@ -81,3 +91,4 @@ def installAll():
     setupNode()
     setupCLJS()
     setupArango()
+    sh("source ~/.bash_profile")

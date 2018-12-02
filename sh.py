@@ -24,6 +24,7 @@ def cp(fr, to, r=False):
 
 def addPath(p):
     sudo("echo 'export PATH=\"$PATH:%s\"' >> /root/bash_config/paths.sh" % (p))
+    sh("source /root/.bash_profile")
 
 def wgetAs(url, filename):
     wget("-O %s %s" % (filename, url))
