@@ -1,4 +1,6 @@
+import os
 from sh import *
+
 
 cli_files = "/root/crucible_cli/files"
 
@@ -25,10 +27,11 @@ def setupElixir():
     y("java-1.8.0-openjdk-devel wxBase.x86_64")
 
     # Erlang
-    wget("https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm")
-    erl_name = "erlang-solutions-1.0-1.noarch.rpm"
-    erl_url = "https://packages.erlang-solutions.com/" + erl_name
-    sudo("rpm -Uvh " + erl_name)
+    #wget("https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm")
+    #erl_name = "erlang-solutions-1.0-1.noarch.rpm"
+    #erl_url = "https://packages.erlang-solutions.com/" + erl_name
+    erl_url = "https://github.com/rabbitmq/erlang-rpm/releases/download/v21.1.4/erlang-21.1.4-1.el7.centos.x86_64.rpm"
+    rpm(erl_url)
     update()
     y("erlang inotify-tools")
 
@@ -61,10 +64,20 @@ def setupNode():
     sudo("npm i -g bower")
 
 def setupArango():
-    sudo("npm i -g webpack foxx-cli")
-    curl("-OL https://download.arangodb.com/arangodb33/CentOS_7/arangodb.repo /etc/yum.repos.d/arangodb.repo")
+    # Arango
+    rpm("https://download.arangodb.com/arangodb33/CentOS_7/x86_64/arangodb3-3.3.19-1.x86_64.rpm")
+
+    # Arango Client
+    rpm("https://download.arangodb.com/arangodb33/CentOS_7/x86_64/arangodb3-client-3.3.19-1.x86_64.rpm")
+
+    # Arango debug info
+    rpm("https://download.arangodb.com/arangodb33/CentOS_7/x86_64/arangodb3-debuginfo-3.3.19-1.x86_64.rpm")
+
     y("arangodb3-3.3.19")
+    y("arangodb3-client-3.3.19")
     y("arangodb3-debuginfo-3.3.19")
+    sudo("npm i -g webpack foxx-cli")
+
 
 def installAll():
     setupBash()

@@ -1,6 +1,12 @@
 import subprocess 
 
-sh = lambda s: subprocess.call(s, shell=True)
+def sh(s):
+    print("==========")
+    print(s)
+    print("")
+    subprocess.call(s, shell=True)
+    print("==========")
+
 sudo = lambda s: sh("sudo " + s)
 y = lambda pkg: sudo("yum install -y " + pkg)
 wget = lambda url: sudo("wget " + url)
@@ -8,6 +14,7 @@ curl = lambda url: sudo("curl " + url)
 echo = lambda s: sudo("echo " + s)
 rm = lambda s: sudo("rm -rf " + s)
 ctl = lambda s: sudo("systemctl " + s)
+update = lambda: sudo("yum update")
 
 def cp(fr, to, r=False):
     if r == True:
@@ -17,3 +24,8 @@ def cp(fr, to, r=False):
 
 def addPath(p):
     sudo("echo 'export PATH=\"$PATH:%s\"' >> /root/bash_config/paths.sh" % (p))
+
+def rpm(url):
+    wget(url + " installer.rpm")
+    sudo("rpm -Uvh installer.rpm")
+    rm("installer.rpm")
