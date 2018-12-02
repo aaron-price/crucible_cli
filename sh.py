@@ -7,6 +7,7 @@ wget = lambda url: sudo("wget " + url)
 curl = lambda url: sudo("curl " + url)
 echo = lambda s: sudo("echo " + s)
 rm = lambda s: sudo("rm -rf " + s)
+ctl = lambda s: sudo("systemctl " + s)
 
 def cp(fr, to, r=False):
     if r == True:

@@ -9,8 +9,12 @@ def setupBash():
     cp(cli_files + "/vim", "~/.vim", True)
     update()
     y("wget git unzip epel-release nginx")
-    sudo("systemctl start nginx")
-    sudo("systemctl enable nginx")
+    ctl("start nginx")
+    ctl("enable nginx")
+    rm("/etc/nginx/nginx.conf")
+    cp(cli_files + "/nginx/HTTPnginx.conf", "/etc/nginx/nginx.conf")
+    ctl("restart nginx")
+    sudo("setsebool -P httpd_can_network_connect 1")
 
 def setupElixir():
     # fulfill some prerequisites
@@ -54,8 +58,15 @@ def setupNode():
     y("nodejs build-essential")
     sudo("npm i -g bower")
 
+def setupArango():
+    sudo("npm i -g webpack foxx-cli")
+    curl("-OL https://download.arangodb.com/arangodb33/CentOS_7/arangodb.repo /etc/yum.repos.d/arangodb.repo")
+    y("arangodb3-3.3.19")
+    y("arangodb3-debuginfo-3.3.19")
+
 def installAll():
     setupBash()
     setupElixir()
     setupNode()
     setupCLJS()
+    setupArango()
