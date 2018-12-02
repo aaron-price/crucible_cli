@@ -17,4 +17,4 @@ Crucible:
 - Python cli for bootstrapping it on a fresh digitalocean droplet.
 
 ## Usage
-git clone git@github.com:aaron-price/crucible_cli.git && ./crucible_cli/__main__.py
+`git clone git@github.com:aaron-price/crucible_cli.git && ./crucible_cli/__main__.py`
