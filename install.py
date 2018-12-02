@@ -13,6 +13,7 @@ def setupBash():
     update()
     y("wget git unzip epel-release nginx vim")
     sudo("git config --global user.email \"coding.aaronp@gmail.com\"")
+    sudo("git config --global user.name \"aaron-price\"")
     ctl("start nginx")
     ctl("enable nginx")
     rm("/etc/nginx/nginx.conf")
@@ -86,9 +87,14 @@ def setupArango():
 
 
 def installAll():
-    setupBash()
-    setupElixir()
-    setupNode()
-    setupCLJS()
-    setupArango()
+    if not isInstalled("nginx"):
+        setupBash()
+    if not isInstalled("elixir"):
+        setupElixir()
+    if not isInstalled("node"):
+        setupNode()
+    if not isInstalled("clj"):
+        setupCLJS()
+    if not isInstalled("arangodb"):
+        setupArango()
     sh("source ~/.bash_profile")

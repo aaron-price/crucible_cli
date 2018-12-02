@@ -1,4 +1,5 @@
 import subprocess 
+from distutils.spawn import find_executable
 
 def sh(s):
     print("==========")
@@ -33,3 +34,6 @@ def rpm(url):
     wgetAs(url, "installer.rpm")
     sudo("rpm -Uvh installer.rpm")
     rm("installer.rpm")
+
+def isInstalled(tool):
+    return not find_executable(tool) == None
