@@ -7,6 +7,8 @@ def setupBash():
     cp(cli_files + "/bash_profile.sh", "~/.bash_profile")
     cp(cli_files + "/bash_config", "~/bash_config", True)
     cp(cli_files + "/vim", "~/.vim", True)
+    sh("source ~/.bash_profile")
+
     update()
     y("wget git unzip epel-release nginx")
     ctl("start nginx")
@@ -44,7 +46,7 @@ def setupCLJS():
     cljs_installer = "linux-install-1.9.0.397.sh"
     cljs_url = "https://download.clojure.org/install/" + cljs_installer
     curl("-O " + cljs_url)
-    sudo("chmod +x " cljs_installer)
+    sudo("chmod +x " + cljs_installer)
     sudo("./" + cljs_installer)
 
     # lein

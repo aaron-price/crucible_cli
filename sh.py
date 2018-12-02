@@ -16,4 +16,4 @@ def cp(fr, to, r=False):
         sudo("cp %s %s" % (fr, to))
 
 def addPath(p):
-    sudo("echo 'export PATH=\"$PATH:%s\"' >> /root/bash_config/paths.sh", % (p))
+    sudo("echo 'export PATH=\"$PATH:%s\"' >> /root/bash_config/paths.sh" % (p))
