@@ -13,3 +13,5 @@ if __name__ == "__main__":
     db.setupDB(data)
     web.setupWeb(data)
     server.setupServer(data)
+    print("Now restart the shell (exit ; access %s)" % (data["title"]))
+    print("And you can start the server with `cd %s/server && mix phx.server`" % (data["title"]))
