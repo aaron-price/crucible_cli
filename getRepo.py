@@ -1,4 +1,5 @@
 from sh import *
+import os
 import getpass
 
 def createKey():
@@ -29,8 +30,23 @@ def getRepo(data):
     configure()
 
     title = data["title"]
-    sudo("git clone git@github.com:aaron-price/crucible.git /root/crucible")
-    sudo("mkdir /root/ " + title)
-    sudo("cp -a /root/crucible/db /root/" + title + "/db/")
-    sudo("cp -a /root/crucible/server /root/" + title + "/server/")
-    sudo("cp -a /root/crucible/web /root/" + title + "/web/")
+    
+    target = "/root/crucible"
+    if not os.path.isdir(target):
+        sudo("git clone git@github.com:aaron-price/crucible.git " + target)
+
+    target = "/root/" + title
+    if not os.path.isdir(target):
+        sudo("mkdir " + target)
+
+    target = "/root/%s/db" % (title)
+    if not os.path.isdir(target):
+        sudo("cp -a /root/crucible/db " + target)
+        
+    target = "/root/%s/server" % (title)
+    if not os.path.isdir():
+        sudo("cp -a /root/crucible/server " + target)
+        
+    target = "/root/%s/web" % (title)
+    if not os.path.isdir():
+        sudo("cp -a /root/crucible/web " + target)
