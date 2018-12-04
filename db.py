@@ -1,4 +1,14 @@
 from sh import *
+import os
 
 def setupDB(data):
-    sh("printf 'db._createDatabase(%s)' | arangosh --server.authentication true" % (data["title"]))
+    title = data["title"]
+    path = "/root/" + title + "/db"
+    oldpwd = os.getcwd()
+    os.chdir(path)
+    sh("npm i")
+    os.chdir(oldpwd)
+
+    pswd = raw_input("Password for database root user: ")
+    sh("printf 'db._createDatabase(\"%s\")' | arangosh --server.password %s" % (title, pswd))
+    sh("foxx install /gql %s --database=%s --username=root -v --setup --password" % (path, title))

@@ -25,10 +25,7 @@ def configure():
     sudo("eval `ssh-agent -s`")
     sudo("ssh-add -k ~/.ssh/mykey_rsa")
 
-def getRepo(data):
-    createKey()
-    configure()
-
+def copyRepo(data):
     title = data["title"]
     
     target = "/root/crucible"
@@ -44,9 +41,16 @@ def getRepo(data):
         sudo("cp -a /root/crucible/db " + target)
         
     target = "/root/%s/server" % (title)
-    if not os.path.isdir():
+    if not os.path.isdir(target):
         sudo("cp -a /root/crucible/server " + target)
         
     target = "/root/%s/web" % (title)
-    if not os.path.isdir():
+    if not os.path.isdir(target):
         sudo("cp -a /root/crucible/web " + target)
+
+def getRepo(data):
+    if not os.path.isfile("/root/.ssh/mykey_rsa"):
+        createKey()
+        configure()
+    copyRepo(data)
+
