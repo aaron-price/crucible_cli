@@ -37,3 +37,21 @@ def rpm(url):
 
 def isInstalled(tool):
     return not find_executable(tool) == None
+
+def replaceLine(filename, key, new_value):
+    f = open(filename, "r")
+    lines = f.readlines()
+    f.close()
+    for i, line in enumerate(lines):
+        if line.split(':')[0].strip(' \n') == key:
+            lines[i] = key + ': ' + new_value + '\n'
+    f = open(filename, "w")
+    f.write("".join(lines))
+    f.close()
+
+
+
+
+
+
+  
