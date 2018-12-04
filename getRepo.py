@@ -9,7 +9,8 @@ def createKey():
     print("")
     sudo("cat %s.pub" % (keypath))
     print("")
-    print("Now go to https://github.com/settings/keys and create a new key with ^^^")
+    print("Now go to https://github.com/settings/ssh/new and create a key with ^^^")
+    print("")
     raw_input("Press enter when done")
 
 def addLine(ln):
@@ -23,7 +24,13 @@ def configure():
     sudo("eval `ssh-agent -s`")
     sudo("ssh-add -k ~/.ssh/mykey_rsa")
 
-def getRepo():
+def getRepo(data):
     createKey()
     configure()
-    sudo("git clone git@github.com:aaron-price/crucible.git")
+
+    title = data["title"]
+    sudo("git clone git@github.com:aaron-price/crucible.git /root/crucible")
+    sudo("mkdir /root/ " + title)
+    sudo("cp -a /root/crucible/db /root/" + title + "/db/")
+    sudo("cp -a /root/crucible/server /root/" + title + "/server/")
+    sudo("cp -a /root/crucible/web /root/" + title + "/web/")
