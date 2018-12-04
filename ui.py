@@ -3,6 +3,7 @@
 def getTitle():
     defaultname = "Chimera"
     name = raw_input("Name your app (" + defaultname + "): ")
+    ip = raw_input("What's the public ip of this droplet? ")
     return name if name != "" else defaultname
 
 def getData():
@@ -11,5 +12,6 @@ def getData():
         "title": title,
         "path": "/root/" + title,
         "title_upper": title.upper(),
-        "title_lower": title.lower()
+        "title_lower": title.lower(),
+        "ip": ip
     }

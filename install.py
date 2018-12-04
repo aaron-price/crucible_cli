@@ -31,7 +31,8 @@ def setupElixir():
     erl_url = "https://github.com/rabbitmq/erlang-rpm/releases/download/v21.1.4/erlang-21.1.4-1.el7.centos.x86_64.rpm"
     rpm(erl_url)
     update()
-    y("erlang inotify-tools")
+    # y("erlang inotify-tools")
+    y("esl-erlang inotify-tools")
 
     # Elixir
     ex_path = "/usr/bin/elixir"

@@ -4,6 +4,7 @@ import install
 import getRepo
 import db
 import web
+import server
 
 if __name__ == "__main__":
     data = ui.getData()
@@ -11,5 +12,4 @@ if __name__ == "__main__":
     getRepo.getRepo(data)
     db.setupDB(data)
     web.setupWeb(data)
-    # Setup server
-    # Setup web frontend
+    server.setupServer(data)

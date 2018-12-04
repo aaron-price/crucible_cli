@@ -1,5 +1,6 @@
 from sh import *
 import os
+import getpass
 
 def setupDB(data):
     title = data["title"]
@@ -9,6 +10,6 @@ def setupDB(data):
     sh("npm i")
     os.chdir(oldpwd)
 
-    pswd = raw_input("Password for database root user: ")
+    pswd = getpass.getpass("Password for database root user: ")
     sh("printf 'db._createDatabase(\"%s\")' | arangosh --server.password %s" % (title, pswd))
     sh("foxx install /gql %s --database=%s --username=root -v --setup --password" % (path, title))
