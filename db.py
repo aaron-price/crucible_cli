@@ -13,3 +13,8 @@ def setupDB(data):
     pswd = getpass.getpass("Password for database root user: ")
     sh("printf 'db._createDatabase(\"%s\")' | arangosh --server.password %s" % (title, pswd))
     sh("foxx install /gql %s --database=%s --username=root -v --setup --password" % (path, title))
+    replaceLine(
+        "/root/bash_config/commands",
+        "foxx", 
+        "            foxx upgrade --database %s --password /gql /root/%s/db" % (title, title),
+        False)

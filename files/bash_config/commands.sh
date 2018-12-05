@@ -54,9 +54,7 @@ function stop() {
 function update() {
     case $1 in
         arangodb)
-            # Updates both dev and test databases
-            foxx-manager replace /Users/aaron/Documents/repos/scribsheet_foxx /api --server.database scribsheet-dev;
-            foxx-manager replace /Users/aaron/Documents/repos/scribsheet_foxx /api --server.database scribsheet-test;;
+            foxx upgrade --database Crucible --password /gql /root/Crucible/db
         secrets)
             echo "export ${2^^}_SECRET_KEY_BASE=\"$(mix phx.gen.secret)\"" >> /root/bash_config/paths.sh;;
         *) print_options "arangodb secrets(Name)";;
