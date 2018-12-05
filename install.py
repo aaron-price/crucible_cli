@@ -12,6 +12,7 @@ def setupBash():
 
     update()
     y("wget git unzip epel-release nginx vim")
+    y("certbot-nginx")
     sudo("git config --global user.email \"coding.aaronp@gmail.com\"")
     sudo("git config --global user.name \"aaron-price\"")
     ctl("start nginx")

@@ -15,3 +15,6 @@ def getData():
         "title_lower": title.lower(),
         "ip": ip
     }
+
+def getDomain():
+    return raw_input("Domain name (e.g. 'crucible.com'): ")
