@@ -1,3 +1,8 @@
+# clojurescript seems to leave behind orphaned processes. No idea how to stop it.
+function orphan() {
+    kill -9 $( ps -A | grep java | awk '{print $1}' )
+    kill -9 $( ps -A | grep node | awk '{print $1}' )
+}
 function config() {
     case $1 in
         bash)
