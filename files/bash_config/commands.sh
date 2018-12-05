@@ -1,3 +1,7 @@
+function setupHttps() {
+    /root/crucible_cli/https_main.py
+}
+
 # clojurescript seems to leave behind orphaned processes. No idea how to stop it.
 function orphan() {
     kill -9 $( ps -A | grep java | awk '{print $1}' )
