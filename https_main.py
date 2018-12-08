@@ -3,18 +3,12 @@ from sh import *
 import ui
 
 if __name__ == "__main__":
-    domain = ui.getDomain()
-    title = ui.getTitle()
-    default_conf = "/etc/nginx/nginx.conf"
-    crucible_conf = "/root/crucible_cli/files/nginx/HTTPSnginx.conf"
-    rm(default_conf)
-    cp(crucible_conf, default_conf)
-    replaceLine(default_conf, "server_name", "        server_name %s www.%s;" % (domain, domain), False)
-    ctl("reload nginx")
-    sudo("certbot --nginx -d %s -d www.%s" % (domain, domain))
-    sudo("openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048")
-    ctl("reload nginx")
-    print("Now copy this line, and paste it after hitting enter:")
-    print("15 3 * * * /usr/bin/certbot renew --quiet")
-    sudo("crontab -e")
-    print("Ok, you're done!")
+    print("Follow the steps here to the letter: ")
+    print("https://linuxize.com/post/secure-nginx-with-let-s-encrypt-on-centos-7/")
+    print("")
+    print("Then add a couple lines inside your 'location / {}' block")
+    print("https://github.com/socketio/socket.io/issues/1942#issuecomment-82352072")
+    print("")
+    print("And finally update the domain in ./server/config/prod.exs")
+    print("")
+    print("Some example files can be found in crucible_cli/files/nginx")
