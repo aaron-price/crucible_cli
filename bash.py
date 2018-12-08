@@ -5,6 +5,7 @@ def add(str):
 def customize(data):
     title = data["title"]
     add("function deploy() {")
+    add("    rm -rf /root/%s/server/priv/static/js" % (title))
     add("    cd /root/%s/web;" % (title))
     add("    npm run deploy;")
     add("    cd /root/%s/server;" % (title))
