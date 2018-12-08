@@ -3,6 +3,8 @@ from sh import *
 import ui
 
 if __name__ == "__main__":
+    print("Set the NS records for the domain, plus two A record (www.domain.com and domain.com)")
+    print("")
     print("Follow the steps here to the letter: ")
     print("https://linuxize.com/post/secure-nginx-with-let-s-encrypt-on-centos-7/")
     print("")
