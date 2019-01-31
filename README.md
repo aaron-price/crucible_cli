@@ -12,6 +12,8 @@ git clone https://github.com/aaron-price/crucible_cli.git && \
 ./crucible_cli/__main__.py
 ```
 
+During installation of arango, it'll give you a password. 
+Copy that and use it later when it asks for it. Remember to change it.
 
 You now have a web app running at your public ip address.
 
