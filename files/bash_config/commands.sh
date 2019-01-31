@@ -54,7 +54,7 @@ function stop() {
 function update() {
     case $1 in
         arangodb)
-            foxx upgrade --database Crucible --password /gql /root/Crucible/db
+            foxx upgrade --database Crucible --password /gql /root/Crucible/db;;
         secrets)
             echo "export ${2^^}_SECRET_KEY_BASE=\"$(mix phx.gen.secret)\"" >> /root/bash_config/paths.sh;;
         *) print_options "arangodb secrets(Name)";;
