@@ -29,22 +29,24 @@ def setupElixir():
     y("java-1.8.0-openjdk-devel wxBase.x86_64")
 
     # Erlang
-    erl_url = "https://github.com/rabbitmq/erlang-rpm/releases/download/v21.1.4/erlang-21.1.4-1.el7.centos.x86_64.rpm"
+    # NEVER USE RABBITMQ! 
+    # They remove vital libs from erlang, which makes elixir impossible to install.
+    # erl_url = "https://github.com/rabbitmq/erlang-rpm/releases/download/v21.1.4/erlang-21.1.4-1.el7.centos.x86_64.rpm"
+    
+    erl_url = "http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm"
     rpm(erl_url)
     update()
     # y("erlang inotify-tools")
     y("esl-erlang inotify-tools")
 
     # Elixir
-    ex_path = "/usr/bin/elixir"
-    sudo("mkdir " + ex_path)
-    ex_url = "https://github.com/elixir-lang/elixir/releases/download/v1.7.4/Precompiled.zip"
-    ex_zip = ex_path + "/Precompiled.zip"
-    wgetAs(ex_url, ex_zip)
-    sudo("unzip " + ex_zip + " -d " + ex_path)
-
-    addPath(ex_path + "/bin")
-    rm(ex_zip)
+    sudo("git clone --single-branch --branch v1.8 https://github.com/elixir-lang/elixir.git /opt/elixir")
+    sudo("cd /opt/elixir")
+    sudo("make clean test")
+    sudo("sudo ln -s /opt/elixir/bin/iex /usr/local/bin/iex")
+    sudo("sudo ln -s /opt/elixir/bin/mix /usr/local/bin/mix")
+    sudo("sudo ln -s /opt/elixir/bin/elixir /usr/local/bin/elixir")
+    sudo("sudo ln -s /opt/elixir/bin/elixirc /usr/local/bin/elixirc")
 
 def setupCLJS():
     cljs_installer = "linux-install-1.9.0.397.sh"
