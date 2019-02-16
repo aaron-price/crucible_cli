@@ -13,6 +13,6 @@ if __name__ == "__main__":
     3. Set up NGINX with https
     """, {
         "1": sshGen,
-        "2": bashSetup
+        "2": bashSetup,
         "3": setupHttps
     })
