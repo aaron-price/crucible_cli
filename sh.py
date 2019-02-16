@@ -56,5 +56,20 @@ def replaceLine(filename, key, new_value, delimiter = ":"):
     f.write("".join(lines))
     f.close()
 
+def replaceStr(filename, old_string, new_string):
+    # Read
+    with open(filename) as f:
+        s = f.read()
+        if old_string not in s:
+            print '"{old_string}" not found in {filename}.'.format(**locals())
+            return
+
+    # Write
+    with open(filename, 'w') as f:
+        print 'Changing "{old_string}" to "{new_string}" in {filename}'.format(**locals())
+        s = s.replace(old_string, new_string)
+        f.write(s)
+
+
 def genpass(size=512, chars=string.ascii_letters + string.digits):
     return ''.join(random.choice(chars) for i in range(size))

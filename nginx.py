@@ -1,8 +1,9 @@
 from sh import *
 import ui
 
-def setupHttps():
-    cli_files = "/root/crucible_cli/resources"
+cli_files = "/root/crucible_cli/resources"
+
+def setupHttp():
     y("epel-release")
     y("nginx")
     y("certbot-nginx")
@@ -14,7 +15,17 @@ def setupHttps():
     cp(cli_files + "/nginx/http/nginx.conf", "/etc/nginx/nginx.conf")
     ctl("restart nginx")
     sudo("setsebool -P httpd_can_network_connect 1")
-    
+
+def setupHttps():
+    domain = raw_input("Your raw domain name (no www or .com): ")
+    sudo("openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048")
+    sudo("mkdir -p /var/lib/letsencrypt/.well-known")
+    sudo("chgrp nginx /var/lib/letsencrypt")
+    sudo("chmod g+s /var/lib/letsencrypt")
+    cp(cli_files + "/nginx/https/snippets", "/etc/nginx/snippets")
+    cp(cli_files + "/nginx/https/nginx.conf", "/etc/nginx/nginx.conf")
+    replaceStr("/etc/nginx/nginx.conf", "crucible", domain)
+
     print("Set the NS records for the domain, plus two A record (www.domain.com and domain.com)")
     print("")
     print("Follow the steps here to the letter: ")
