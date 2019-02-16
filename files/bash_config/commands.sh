@@ -1,3 +1,15 @@
+# genpass = 512 char random hash
+# genpass 32 = 32 char random hash
+# composable like so: echo "$(genpass)" >> test.txt
+function genpass() {
+  if [ $# -eq 0 ] 
+  then
+    env LC_CTYPE=C LC_ALL=C tr -dc "a-zA-Z0-9-_\$\!\#\%\*" < /dev/urandom | head -c 512
+  else
+    env LC_CTYPE=C LC_ALL=C tr -dc "a-zA-Z0-9-_\$\!\#\%\*" < /dev/urandom | head -c "$1" 
+  fi
+}
+
 function setupHttps() {
     /root/crucible_cli/https_main.py
 }
@@ -6,6 +18,7 @@ function setupHttps() {
 function orphan() {
     kill -9 $( ps -A | grep java | awk '{print $1}' )
     kill -9 $( ps -A | grep node | awk '{print $1}' )
+    kill -9 $( ps -A | grep julia | awk '{print $1}' )
 }
 function config() {
     case $1 in
