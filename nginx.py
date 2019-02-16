@@ -22,9 +22,11 @@ def setupHttps():
     sudo("mkdir -p /var/lib/letsencrypt/.well-known")
     sudo("chgrp nginx /var/lib/letsencrypt")
     sudo("chmod g+s /var/lib/letsencrypt")
-    cp(cli_files + "/nginx/https/snippets", "/etc/nginx/snippets")
+    cp(cli_files + "/nginx/https/snippets", "/etc/nginx/snippets", True)
     cp(cli_files + "/nginx/https/nginx.conf", "/etc/nginx/nginx.conf")
     replaceStr("/etc/nginx/nginx.conf", "crucible", domain)
+    ctl("reload nginx")
+    sudo("certbot certonly --agree-tos --email coding.aaronp@gmail.com --webroot -w /var/lib/letsencrypt/ -d " + domain + ".com -d www." + domain + ".com")
 
     print("Set the NS records for the domain, plus two A record (www.domain.com and domain.com)")
     print("")
