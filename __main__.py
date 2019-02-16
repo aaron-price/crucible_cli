@@ -1,9 +1,7 @@
 #!/usr/bin/python
 from ui import multipleChoice
 from ssh_gen import sshGen
-
-def bashSetup():
-    print "It's the monster bash"
+from bash import bashSetup
 
 if __name__ == "__main__":
     goal = multipleChoice("""

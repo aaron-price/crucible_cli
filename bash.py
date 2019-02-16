@@ -1,4 +1,16 @@
 from sh import *
+
+def bashSetup():
+    rm("~/.bash_profile")
+    cp(cli_files + "/bash_profile.sh", "~/.bash_profile")
+    cp(cli_files + "/bash_config", "~/bash_config", True)
+    cp(cli_files + "/vim", "~/.vim", True)
+    sh("source ~/.bash_profile")
+    update()
+    y("wget unzip vim")
+    sudo("git config --global user.email \"coding.aaronp@gmail.com\"")
+    sudo("git config --global user.name \"aaron-price\"")
+
 def add(str):
     sudo("echo '%s' >> /root/bash_config/commands.sh" % (str))
 
