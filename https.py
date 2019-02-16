@@ -3,7 +3,8 @@ import ui
 
 def setupHttps():
     cli_files = "/root/crucible_cli/resources"
-    y("epel-release nginx")
+    y("epel-release")
+    y("nginx")
     y("certbot-nginx")
     ctl("start nginx")
     ctl("enable nginx")
