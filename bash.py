@@ -13,7 +13,8 @@ def bashSetup():
     sudo("git config --global user.name \"aaron-price\"")
 
     # vimfiles are in a separate repo for convenience outside crucible.
-    sudo("git clone git@github.com:aaron-price/vim.git ~/.vim")
+    sudo("git clone https://github.com/aaron-price/vim.git ~/.vim")
+    print("Bash and vim are all set up now!")
 
 def add(str):
     sudo("echo '%s' >> /root/bash_config/commands.sh" % (str))
