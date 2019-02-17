@@ -6,6 +6,7 @@ from nginx import setupHttp, setupHttps
 from node import setupNode
 from elixir import setupElixir
 from julia import setupJulia
+from clj import setupClojure
 from arango import setupArango
 
 if __name__ == "__main__":
