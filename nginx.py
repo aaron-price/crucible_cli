@@ -42,6 +42,6 @@ def setupHttps():
         print("")
         print("And finally update the domain in ./server/config/prod.exs")
         print("")
-   else:
-       print("Hmm try again later.")
+    else:
+        print("Hmm try again later.")
 
