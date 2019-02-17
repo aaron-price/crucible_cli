@@ -31,5 +31,5 @@ if __name__ == "__main__":
         "6": setupElixir,
         "7": setupJulia,
         "8": setupClojure,
-        "9": setupArang
+        "9": setupArango
     })
