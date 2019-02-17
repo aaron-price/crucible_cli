@@ -4,6 +4,7 @@ from ssh_gen import sshGen
 from bash import bashSetup
 from nginx import setupHttp, setupHttps
 from node import setupNode
+from elixir import setupElixir
 
 if __name__ == "__main__":
     goal = multipleChoice("""
@@ -19,5 +20,6 @@ if __name__ == "__main__":
         "2": bashSetup,
         "3": setupHttp,
         "4": setupHttps,
-        "5": setupNode
+        "5": setupNode,
+        "6": setupElixir
     })

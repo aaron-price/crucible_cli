@@ -36,7 +36,6 @@ def setupElixir():
     erl_url = "http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm"
     rpm(erl_url)
     update()
-    # y("erlang inotify-tools")
     y("esl-erlang inotify-tools")
 
     # Elixir
