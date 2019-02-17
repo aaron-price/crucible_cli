@@ -5,6 +5,8 @@ from bash import bashSetup
 from nginx import setupHttp, setupHttps
 from node import setupNode
 from elixir import setupElixir
+from julia import setupJulia
+from arango import setupArango
 
 if __name__ == "__main__":
     goal = multipleChoice("""
@@ -16,11 +18,17 @@ if __name__ == "__main__":
     4. Set up HTTPS (must do ^above^ first)
     5. Install node & npm
     6. Install erlang & elixir
+    7. Install Julia
+    8. Install CLojure
+    9. Install ArangoDB
     """, {
         "1": sshGen,
         "2": bashSetup,
         "3": setupHttp,
         "4": setupHttps,
         "5": setupNode,
-        "6": setupElixir
+        "6": setupElixir,
+        "7": setupJulia,
+        "8": setupClojure,
+        "9": setupArang
     })
