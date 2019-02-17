@@ -21,7 +21,7 @@ if __name__ == "__main__":
     6. Install erlang & elixir
     7. Install Julia
     8. Install CLojure
-    9. Install ArangoDB
+    9. Install ArangoDB (WIP)
     """, {
         "1": sshGen,
         "2": bashSetup,

@@ -6,5 +6,12 @@ def setupArango():
     y("arangodb3")
     y("arangodb3-debuginfo")
     print "Here, have a password"
-    print genpass()
+    pswd = genpass()
+    print pswd
     sudo("arango-secure-installation")
+    ctl("start arangodb")
+    sh("printf 'db._createDatabase(\"main\")' | arangosh --server.password %s" % (pswd))
+    sh("mkdir -p /root/app/arango/")
+    sh("npm i -g foxx-cli")
+    # @TODO
+    # sh("foxx install /gql /root/app/arango --database=\"main\" --password /gql /root/app/arango")
