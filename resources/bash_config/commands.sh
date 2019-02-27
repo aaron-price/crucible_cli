@@ -7,6 +7,8 @@ function snicket() {
 }
 function config() {
     case $1 in
+        arangodb)
+            vim /etc/arangodb3/arangod.conf;;
         bash)
             cd ~/bash_config; 
             vim;;

@@ -8,6 +8,8 @@ from elixir import setupElixir
 from julia import setupJulia
 from clj import setupClojure
 from arango import setupArango
+from app import setupApp
+
 
 if __name__ == "__main__":
     goal = multipleChoice("""
@@ -22,6 +24,7 @@ if __name__ == "__main__":
     7. Install Julia
     8. Install CLojure
     9. Install ArangoDB (WIP)
+    10. Install Crucible App
     """, {
         "1": sshGen,
         "2": bashSetup,
@@ -31,5 +34,6 @@ if __name__ == "__main__":
         "6": setupElixir,
         "7": setupJulia,
         "8": setupClojure,
-        "9": setupArango
+        "9": setupArango,
+        "10": setupApp,
     })

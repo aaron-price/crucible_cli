@@ -3,12 +3,26 @@ import random
 import string
 from distutils.spawn import find_executable
 
-def sh(s):
-    print("==========")
-    print(s)
-    print("")
-    subprocess.call(s, shell=True)
-    print("==========")
+def sh(s, silent=False):
+    if silent:
+        subprocess.call(s, shell=True)
+    else:
+        print("==========")
+        print(s)
+        print("")
+        subprocess.call(s, shell=True)
+        print("==========")
+
+# sh, but capture the return value
+# e.g. foo = shv('echo hello') ## -> "hello"
+def shv(s):
+    proc = subprocess.Popen(s, stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
+    out, err = proc.communicate()
+    return out.rstrip()
+
+def addPathVar(name, value, silent=False):
+    sh("".join(['echo "export ', name, '=\\\"', value, '\\\""', ' >> /root/bash_config/paths.sh']), silent) 
+    sh("source /root/.bash_profile")
 
 sudo = lambda s: sh("sudo " + s)
 y = lambda pkg: sudo("yum install -y " + pkg)
